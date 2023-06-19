@@ -5,13 +5,38 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Dashboard</title>
+<title>Read Share</title>
 <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
 	<div class = "super">
-		<h1>Welcome <c:out value="${name}"/></h1>
-		<a href = "/clear">Logout</a>
+		<div class = "row">
+			<h1>Welcome <c:out value="${name}"/></h1>
+			<a href = "/clear">Logout</a>
+		</div>
+		<div class = "row">
+			<p>Books from everyone's shelves:</p>
+			<a href = "books/new">+ Add a book to my shelf!</a>
+		</div>
+		<table>
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Title</th>
+					<th>Author Name</th>
+					<th>Posted By</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var = "book" items = "${ books }">
+					<tr>
+						<td><c:out value = "${ book.id }"/></td>
+						<td><a href = "/books/${book.id}"><c:out value="${book.title}"/></a></td>
+						<td><c:out value = "${ book.author }"/></td>
+						<td><c:out value = "${ book.user.userName }"/></td>
+				</c:forEach>
+			</tbody>
+		</table>
 	</div>
 </body>
 </html>

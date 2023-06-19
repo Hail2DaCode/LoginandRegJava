@@ -37,15 +37,9 @@ public class MainController {
 		 }
 		 session.setAttribute("id", legitUser.getId());
 		 session.setAttribute("name", legitUser.getUserName());
-		 return "redirect:/welcome";
+		 return "redirect:/books";
 	}
-	@GetMapping("/welcome")
-	public String dash(Model model, HttpSession session) {
-		if (session.getAttribute("id") == null) {
-			return "redirect:/";
-		}
-		return "welcome.jsp";
-	}
+	
 	@PostMapping("/login")
 	public String login(@Valid @ModelAttribute("newLogin") LoginUser newLogin,
 			BindingResult result, Model model, HttpSession session) {
@@ -57,7 +51,7 @@ public class MainController {
 		else {
 			 session.setAttribute("id", user.getId());
 			 session.setAttribute("name", user.getUserName());
-			 return "redirect:/welcome";
+			 return "redirect:/books";
 		}
 	}
 	@GetMapping("/clear")

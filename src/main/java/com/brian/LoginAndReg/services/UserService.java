@@ -1,7 +1,7 @@
 package com.brian.LoginAndReg.services;
 
 import java.util.Calendar;
-import java.util.Date;
+//import java.util.Date;
 import java.util.Optional;
 
 import org.mindrot.jbcrypt.BCrypt;
@@ -68,5 +68,14 @@ public class UserService {
 			return user;
 		}
 		
+	}
+	public User findUser(Long id) {
+		Optional<User> optionalUser = userRepo.findById(id);
+		if(optionalUser.isPresent()) {
+			return optionalUser.get();
+		}
+		else {
+			return null;
+		}
 	}
 }

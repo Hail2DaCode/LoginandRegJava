@@ -2,14 +2,18 @@ package com.brian.LoginAndReg.models;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
@@ -56,6 +60,9 @@ public class User {
     private Calendar birthday;
     @Transient
     private String sigil;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Book> books;
+    
     
     public User() {}
     
@@ -137,6 +144,14 @@ public class User {
 
 	public void setSigil(String sigil) {
 		this.sigil = sigil;
+	}
+
+	public List<Book> getBooks() {
+		return books;
+	}
+
+	public void setBooks(List<Book> books) {
+		this.books = books;
 	}
     
     
