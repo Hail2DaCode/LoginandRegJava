@@ -16,6 +16,7 @@
 		</div>
 		<div class = "row">
 			<p>Books from everyone's shelves:</p>
+			<p id = "smallParagraph"><a href = "/bookmarket">Go to BookMarket!</a></p>
 			<a href = "books/new">+ Add a book to my shelf!</a>
 		</div>
 		<table>

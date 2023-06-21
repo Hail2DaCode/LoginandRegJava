@@ -167,3 +167,13 @@ label {
 .rank {
 	flex:1;
 }
+#smallParagraph {
+	font-size: 16pt;
+}
+.deleteForm {
+	background-color: inherit;
+	border: none;
+	display: flex;
+	flex-direction: column;
+	align-items:center;
+}

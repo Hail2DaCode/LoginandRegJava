@@ -63,6 +63,10 @@ public class BookController {
 		Book book = bookServ.findBook(id);
 		System.out.println(session.getAttribute("id"));
 		model.addAttribute("book", book);
+		if (book.getBorrower() != null) {
+			User borrower = book.getBorrower();
+			model.addAttribute("borrower", borrower);
+		}
 		return "editBook.jsp";
 	}
 	@GetMapping("books/{id}/delete")
@@ -83,5 +87,32 @@ public class BookController {
 			bookServ.createBook(updateBook);
 			return "redirect:/books";
 		}
+		
+	}
+	@GetMapping("/bookmarket")
+	public String bookMarket(Model model, HttpSession session) {
+		List<Book> unborrowed = bookServ.getUnborrowedBooks();
+		System.out.println(session.getAttribute("id"));
+		User user = userServ.findUser((Long) session.getAttribute("id"));
+		model.addAttribute("user", user);
+		model.addAttribute("unborrowed", unborrowed);
+		return "borrowed.jsp";
+	}
+	@GetMapping("/bookmarket/{id}")
+	public String borrow(@PathVariable("id") Long id, HttpSession session) {
+		Book book = bookServ.findBook(id);
+		System.out.println(session.getAttribute("id"));
+		User borrower = userServ.findUser((Long) session.getAttribute("id"));
+		book.setBorrower(borrower);
+		bookServ.createBook(book);
+		return "redirect:/bookmarket";
+	}
+	
+	@GetMapping("/return/{id}")
+	public String returnBook(@PathVariable("id") Long id) {
+		Book book = bookServ.findBook(id);
+		book.setBorrower(null);
+		bookServ.createBook(book);
+		return "redirect:/bookmarket";
 	}
 }

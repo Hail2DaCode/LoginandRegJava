@@ -32,5 +32,8 @@ public class BookService {
 	public void deleteBook(Long id) {
 		bookRepo.deleteById(id);
 	}
+	public List<Book> getUnborrowedBooks() {
+		return bookRepo.findByBorrower_idIsNull();
+	}
 	
 }

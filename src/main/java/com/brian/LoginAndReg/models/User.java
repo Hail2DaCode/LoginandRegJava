@@ -62,9 +62,19 @@ public class User {
     private String sigil;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Book> books;
+    @OneToMany(mappedBy = "borrower", fetch = FetchType.LAZY)
+    private List<Book> borrows;
     
     
-    public User() {}
+    public List<Book> getBorrows() {
+		return borrows;
+	}
+
+	public void setBorrows(List<Book> borrows) {
+		this.borrows = borrows;
+	}
+
+	public User() {}
     
     @PrePersist
     protected void onCreate(){

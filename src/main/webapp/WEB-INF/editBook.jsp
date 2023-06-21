@@ -31,9 +31,12 @@
 			<form:textarea path="opinion"  rows="5" columns = "30"/>
 		</div>
 		<div class = "add" id = "add5">
-<%-- 			<form:input type = "hidden" path = "user" value = "${id}"/> --%>
+			<form:input type = "hidden" path = "borrower" value = "${book.borrower.id}"/>
 			<input class="btn" id ="submit" type = "submit" value="Submit"/>
 		</div>
+	</form:form>
+	<form:form action = "/books/${book.id }/delete" method = "get" id = "deleteForm" class="deleteForm" modelAttribute = "book">
+		<input class = "btn" type = "submit" value = "Delete">
 	</form:form>
 	</div>
 </body>
